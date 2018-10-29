@@ -16,6 +16,7 @@ class CrudDialogEx extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      pickSet: new Set(),
       formKey: 0,
       viewIndex: props.withoutList ? 1 : 0,
       editingSource: null,
@@ -26,11 +27,22 @@ class CrudDialogEx extends React.PureComponent {
   handleItemClick = (value, index) => {
     const {
       picker,
+      multiple,
       // editor,
     } = this.props;
 
+    const { pickSet } = this.state;
+
     if (picker) {
-      if (this.props.onClose) {
+      if (multiple) {
+        const newSet = new Set(pickSet);
+        if (newSet.has(value)) {
+          newSet.delete(value);
+        } else {
+          newSet.add(value);
+        }
+        this.setState({ pickSet: newSet });
+      } else if (this.props.onClose) {
         this.props.onClose(value);
       }
     } else {
@@ -127,7 +139,7 @@ class CrudDialogEx extends React.PureComponent {
     } = this.props;
 
     const {
-      formKey, editingSource, otherEditingParams, searchText
+      pickSet, formKey, editingSource, otherEditingParams, searchText
     } = this.state;
     const editingParams = { ...eP, ...otherEditingParams };
     if (editingSource) {
@@ -170,6 +182,7 @@ class CrudDialogEx extends React.PureComponent {
             { addItemPlacement === 'start' && addItem }
             {list.map(
               (...args) => renderListItem({
+                picked: pickSet.has(args[0]),
                 handleItemClick: this.handleItemClick.bind(null, args[0], args[1]),
               }, ...args)
             )}

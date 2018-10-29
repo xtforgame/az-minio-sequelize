@@ -81,6 +81,7 @@ export default ({ colors, colorProps, ...props }) => (
     variant="outlined"
     {...props}
     value=" "
+    InputLabelProps={{ shrink: true }}
     InputProps={{
       inputComponent: Content,
       inputProps: {

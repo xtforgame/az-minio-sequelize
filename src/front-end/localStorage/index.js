@@ -1,4 +1,5 @@
 import throttle from 'lodash/throttle';
+import { jwtIssuer } from 'common/config';
 import {
   makeRememberUserSelector,
 } from '~/containers/App/selectors';
@@ -7,9 +8,11 @@ import modelMapEx from '~/containers/App/modelMapEx';
 const userSessionSelector = modelMapEx.cacher.selectorCreatorSet.session.selectMe();
 const rememberUserSelector = makeRememberUserSelector();
 
+const stateKey = `${jwtIssuer}:state`;
+
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = localStorage.getItem(stateKey);
     if (serializedState == null) {
       return undefined;
     }
@@ -27,19 +30,20 @@ export const saveState = (state) => {
   try {
     // console.log('state :', state);
     const serializedState = JSON.stringify(state);
-    localStorage.setItem('state', serializedState);
+    localStorage.setItem(stateKey, serializedState);
   } catch (err) {
     console.error('saveState error :', err);
   }
 };
 
 export const removeState = () => {
-  localStorage.removeItem('state');
+  localStorage.removeItem(stateKey);
 };
 
-export const clearState = () => {
-  localStorage.clear();
-};
+// marked, don't clear state of other app in the same domain
+// export const clearState = () => {
+//   localStorage.clear();
+// };
 
 const delaySave = throttle((store) => {
   const state = store.getState();

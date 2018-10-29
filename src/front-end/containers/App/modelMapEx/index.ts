@@ -66,6 +66,10 @@ export const createModelMapEx = () => {
   const querchy = new QuerchyDS({
     commonConfig: {
       defaultBuildUrl: (modelBaseUrl, action) => {
+        const options = action.options || {};
+        const actionProps = options.actionProps || {};
+        const { url } = actionProps;
+        if (url) { return url; }
         if (action.crudType === 'create' || action.crudType === 'getCollection') {
           return modelBaseUrl;
         }

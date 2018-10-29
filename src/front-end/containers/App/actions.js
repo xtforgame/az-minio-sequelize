@@ -8,6 +8,9 @@ import {
   REQUEST_SAVE_USER_SETTING,
   SAVE_USER_SETTINGS,
   CLEAR_SENSITIVE_DATA,
+
+  SET_SELECTED_ORGANIZATION_ID,
+  SET_SELECTED_PROJECT_ID,
 } from './constants';
 
 export const greet = name => ({ type: GREET, name });
@@ -23,3 +26,6 @@ export const requestSaveUserSetting = (userSettingType, data) => ({
 });
 export const saveUserSettings = () => ({ type: SAVE_USER_SETTINGS });
 export const clearSensitiveData = () => ({ type: CLEAR_SENSITIVE_DATA });
+
+export const setSelectedOrganizationId = (organizationId) => ({ type: SET_SELECTED_ORGANIZATION_ID, organizationId });
+export const setSelectedProjectId = (projectId) => ({ type: SET_SELECTED_PROJECT_ID, projectId });

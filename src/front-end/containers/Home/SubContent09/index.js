@@ -7,8 +7,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import FormDialogInput from '~/components/FormInputs/FormDialogInput';
 import CrudDialogEx from '~/components/Dialogs/CrudDialogEx';
-import useDialogState, { Cancel } from '~/hooks/useDialogState';
 import CrudForm from './CrudForm';
 
 const useStyles = makeStyles(theme => ({
@@ -24,9 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 export default (props) => {
   const {
-    value,
-    dialogProps: dp1,
-    onChange = () => {},
+    dialogProps,
   } = props;
 
   const classes = useStyles();
@@ -47,26 +45,6 @@ export default (props) => {
       setList(newList);
     }
   };
-
-  const [{
-    // open,
-    exited,
-    dialogProps: dp2,
-  }, {
-    handleOpen,
-    // handleClose,
-    // handleExited,
-  }] = useDialogState({
-    open: () => {
-    },
-    close: (v) => {
-      if (v !== undefined && v !== Cancel) {
-        onChange(v);
-      }
-    },
-  });
-
-  const dialogProps = { ...dp1, ...dp2 };
 
   const renderAddItem = ({
     handleItemClick,
@@ -117,15 +95,33 @@ export default (props) => {
   const onStartSearch = () => setSearchText('');
   const onFinishSearch = () => setSearchText('');
 
+  const [value, setValue] = useState(null);
   return (
-    <React.Fragment>
-      <Button
-        variant="contained"
-        onClick={handleOpen}
-      >
-        Crud Dialog
-      </Button>
-      {(!exited) && (
+    <FormDialogInput
+      label="DateRange"
+      value={value}
+      displayValue={() => 'XX'}
+      renderButton={({ buttonProps }) => (
+        <Button
+          variant="contained"
+          {...buttonProps}
+        >
+          Crud Dialog
+        </Button>
+      )}
+      onChange={setValue}
+      // buttonProps={{
+      //   fullWidth: true,
+      // }}
+      dialogProps={dialogProps}
+      renderDialog={({
+        label,
+        title,
+        open,
+        handleClose,
+        value,
+        dialogProps,
+      }) => (
         <CrudDialogEx
           list={searchText ? list.filter(item => (item.text || '').includes(searchText)) : list}
           addItemPlacement="start"
@@ -140,6 +136,6 @@ export default (props) => {
           {...dialogProps}
         />
       )}
-    </React.Fragment>
+    />
   );
 };

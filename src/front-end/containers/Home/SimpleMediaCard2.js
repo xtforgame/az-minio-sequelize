@@ -18,7 +18,6 @@ const useStyles = makeStyles(theme => ({
   },
   expand: {
     marginLeft: 'auto',
-    marginRight: -8,
     [theme.breakpoints.up('sm')]: {
       marginRight: 0,
     },
@@ -54,7 +53,7 @@ export default (props) => {
             across all continents except Antarctica
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions disableSpacing>
           <Button dense="true" color="primary">
             Share
           </Button>

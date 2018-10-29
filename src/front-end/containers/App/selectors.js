@@ -28,6 +28,24 @@ const makeUiThemeSelector = () => createSelector(
   persistence => persistence.uiTheme || defaultUiTheme,
 );
 
+const makeSelectedProjectIdSelector = () => createSelector(
+  persistenceSelector,
+  persistence => persistence.selectedProjectId,
+);
+
+const makeSelectedProjectSelector = () => createSelector(
+  modelMapEx.cacher.selectorCreatorSet.project.selectResourceMapValues(),
+  persistenceSelector,
+  (projects, persistence) => (projects && projects[persistence.selectedProjectId]),
+);
+
+const makeDefaultProjectSelector = () => createSelector(
+  modelMapEx.cacher.selectorCreatorSet.project.selectResourceMapValues(),
+  makeSelectedProjectIdSelector(),
+  (projects, projectId) => ((projects && Object.values(projects)) || [])
+    .filter(p => (projectId && p.id === projectId) || (!projectId/* && p.name === 'default' */))[0],
+);
+
 const appTempStateSelector = state => state.global.appTempState;
 
 export {
@@ -37,4 +55,9 @@ export {
   makeUiThemeSelector,
 
   appTempStateSelector,
+
+
+  makeSelectedProjectIdSelector,
+  makeSelectedProjectSelector,
+  makeDefaultProjectSelector,
 };

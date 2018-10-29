@@ -12,7 +12,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import EnhancedTableHead from './EnhancedTableHead';
-import EnhancedTableActionMenuButton from './EnhancedTableActionMenuButton';
+import MoreActionMenuButton from '~/components/Buttons/MoreActionMenuButton';
 import ProgressWithMask from '~/components/Progress/ProgressWithMask';
 
 const styles = theme => ({
@@ -229,7 +229,7 @@ class EnhancedTable extends React.PureComponent { // eslint-disable-line react/p
                     { getActionMenuItems
                       && (
                         <TableCell padding="checkbox" className={classes.actionsCell}>
-                          <EnhancedTableActionMenuButton
+                          <MoreActionMenuButton
                             getActionMenuItems={getActionMenuItems}
                           />
                         </TableCell>

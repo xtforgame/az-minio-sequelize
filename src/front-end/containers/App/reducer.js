@@ -4,6 +4,9 @@ import {
   CHANGE_THEME,
   USER_LOADED,
   FAIL_TO_LOAD_USER,
+
+  SET_SELECTED_ORGANIZATION_ID,
+  SET_SELECTED_PROJECT_ID,
 } from './constants';
 
 import { createModelMapEx } from './modelMapEx';
@@ -31,6 +34,30 @@ const persistence = (state = { rememberUser: false }, action) => {
       return {
         ...state,
         uiTheme: action.uiTheme,
+      };
+    }
+
+    case SET_SELECTED_ORGANIZATION_ID: {
+      if (action.organizationId && state.organizationId
+        && action.organizationId === state.organizationId
+      ) {
+        break;
+      }
+      return {
+        ...state,
+        selectedOrganizationId: action.organizationId,
+      };
+    }
+
+    case SET_SELECTED_PROJECT_ID: {
+      if (action.projectId && state.projectId
+        && action.projectId === state.projectId
+      ) {
+        break;
+      }
+      return {
+        ...state,
+        selectedProjectId: action.projectId,
       };
     }
 

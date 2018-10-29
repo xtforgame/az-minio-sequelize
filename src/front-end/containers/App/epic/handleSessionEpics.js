@@ -37,6 +37,15 @@ const dispatchSessionVerifiedAfterPostedSession = (action$, state$) => action$.o
     ])
   );
 
+const dispatchSessionVerifiedAfterGotSession = (action$, state$) => action$.ofType(
+    session.read.creatorRefs.respond.actionType
+  )
+    .pipe(
+      mergeMap(action => [
+        sessionVerified(action.response.data),
+      ])
+    );
+
 const fetchDataAfterSessionVerified = (action$, state$, { getStore }) => action$.ofType(SESSION_VERIFIED)
   .pipe(
     mergeMap((action) => {
@@ -74,20 +83,21 @@ const clearAuthorizationHeaderAfterClearSession = (action$, state$) => action$.o
     })
   );
 
-const autologinAfterRegistration = (action$, state$) => action$.ofType(user.create.actionType)
-  .pipe(
-    switchMap(
-      startAction => action$.ofType(user.create.creatorRefs.respond.actionType)
-      .pipe(
-        take(1), // don't listen forever! IMPORTANT!
-        switchMap(() => [session.create(startAction.data.accountLinks[0])])
-      )
-    )
-  );
+// const autologinAfterRegistration = (action$, state$) => action$.ofType(user.create.actionType)
+//   .pipe(
+//     switchMap(
+//       startAction => action$.ofType(user.create.creatorRefs.respond.actionType)
+//       .pipe(
+//         take(1), // don't listen forever! IMPORTANT!
+//         switchMap(() => [session.create(startAction.data.accountLinks[0])])
+//       )
+//     )
+//   );
 
 export default [
   dispatchSessionVerifiedAfterPostedSession,
+  dispatchSessionVerifiedAfterGotSession,
   fetchDataAfterSessionVerified,
   clearAuthorizationHeaderAfterClearSession,
-  autologinAfterRegistration,
+  // autologinAfterRegistration,
 ];
