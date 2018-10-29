@@ -1,6 +1,8 @@
 import path from 'path';
 import appRootPath from 'app-root-path';
 
+export { jwtIssuer } from 'common/config';
+
 const appRoot = appRootPath.resolve('./');
 const secretsFolder = path.join(appRoot, 'dev-secrets');
 
@@ -32,6 +34,13 @@ const mailerConfig = {
   senderName: '"Az Service" <no-reply@az-authn.io>',
 };
 
+const postgresPort = 5432;
+const postgresUser = 'rick';
+const postgresDbName = 'db_rick_data';
+const postgresPassword = 'xxxx1234';
+const postgresHost = 'localhost';
+
+
 export {
   credentialFiles,
   jwtSecretFiles,
@@ -44,4 +53,10 @@ export {
   externalUrl,
 
   mailerConfig,
+
+  postgresPort,
+  postgresUser,
+  postgresDbName,
+  postgresPassword,
+  postgresHost,
 };

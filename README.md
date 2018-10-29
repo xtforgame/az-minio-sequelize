@@ -1,6 +1,6 @@
-# AzReactMaterialDev
+# AzFullstackSequelizeDev
 
-A react material ui seed project
+A fullstack sequelize seed project
 
 Run `npm install`
 

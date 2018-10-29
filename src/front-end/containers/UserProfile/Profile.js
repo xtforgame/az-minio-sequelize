@@ -195,7 +195,7 @@ class Profile extends React.PureComponent {
       if (values.avatarImg) {
         patchData.picture = values.avatarImg;
       }
-      p = userP.create(user.id, patchData);
+      p = userP.update(user.id, patchData);
     }
     p.then(() => {
       this.setState({

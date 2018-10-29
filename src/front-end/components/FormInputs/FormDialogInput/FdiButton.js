@@ -12,6 +12,7 @@ export default props => (
   <TextField
     variant="outlined"
     {...props}
+    InputLabelProps={{ shrink: !!props.value }}
     InputProps={{
       inputComponent: Content,
       inputProps: {

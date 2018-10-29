@@ -15,6 +15,7 @@ import getRoutes from './getRoutes';
 import fontLoader from './fontLoader';
 import { loadState } from './localStorage';
 import modelMapEx from '~/containers/App/modelMapEx';
+import HeaderManager from '~/utils/HeaderManager';
 
 import App from '~/containers/App';
 import { changeLocale } from '~/containers/LanguageProvider/actions';
@@ -36,7 +37,9 @@ const userSessionSelector = modelMapEx.cacher.selectorCreatorSet.session.selectM
 const session = userSessionSelector(store.getState());
 
 if (session) {
-  store.dispatch(sessionVerified(session));
+  // store.dispatch(sessionVerified(session));
+  HeaderManager.set('Authorization', `${session.token_type} ${session.token}`);
+  store.dispatch(modelMapEx.querchy.actionCreatorSets.session.read('me'));
 }
 
 console.log('runningMode :', runningMode);

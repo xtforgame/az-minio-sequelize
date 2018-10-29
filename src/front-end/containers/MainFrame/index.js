@@ -13,6 +13,7 @@ import {
   appTempStateSelector,
 } from '~/containers/App/selectors';
 import createCommonStyles from '~/styles/common';
+import ProjectDropdown from '~/containers/ProjectDropdown';
 import MainAppBar from './MainAppBar';
 import ErrorContent from './ErrorContent';
 import {
@@ -81,10 +82,10 @@ class MainFrame extends React.PureComponent {
     const sideList = (
       <div className={classes.list}>
         <RouteList closeDrawer={this.closeDrawer} />
-        <Divider />
+        {/* <Divider />
         {getMailFolderList(this.closeDrawer, () => push('/home'), () => push('/async-in-main'), () => push('/login'))}
         <Divider />
-        {getOtherMailFolderList(this.closeDrawer)}
+        {getOtherMailFolderList(this.closeDrawer)} */}
       </div>
     );
 
@@ -108,6 +109,16 @@ class MainFrame extends React.PureComponent {
             // onClick={this.toggleDrawer(false)}
             // onKeyDown={this.toggleDrawer(false)}
           >
+            <div style={{
+              width: '100%',
+              paddingTop: 16,
+              paddingBottom: 16,
+              paddingLeft: 8,
+              paddingRight: 8,
+            }} >
+              <ProjectDropdown key="projectSelector" style={{ width: '100%' }} />
+            </div>
+            <Divider />
             {sideList}
           </div>
         </Drawer>

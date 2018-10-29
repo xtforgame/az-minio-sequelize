@@ -13,6 +13,7 @@ export default withOnPressEnterEvent(props => (
   <TextField
     variant="outlined"
     {...props}
+    InputLabelProps={{ shrink: !!props.value }}
     InputProps={{
       inputComponent: Content,
       inputProps: {

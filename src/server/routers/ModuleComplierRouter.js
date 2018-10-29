@@ -9,7 +9,6 @@ import {
   promiseReduce,
 } from 'common/utils';
 import RouterBase from '../core/router-base';
-import fakeUserManager from '../utils/fakeUserManager';
 
 const options = {
   presets: [
@@ -33,7 +32,7 @@ const options = {
 
 export default class ModuleComplierRouter extends RouterBase {
   setupRoutes({ router }) {
-    router.post('/api/compile', fakeUserManager.getIdentity, (ctx, next) => {
+    router.post('/api/compile', this.authKit.koaHelper.getIdentity, (ctx, next) => {
       // if (!ctx.local.userSession || !ctx.local.exposedUser) {
       //   RestfulError.koaThrowWith(ctx, 404, 'User not found');
       // }

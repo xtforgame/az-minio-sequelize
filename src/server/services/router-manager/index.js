@@ -15,11 +15,20 @@ export default class RouterManager extends ServiceBase {
 
   static $type = 'service';
 
-  static $inject = ['httpApp', 'mailer'];
+  static $inject = ['httpApp', 'resourceManager', 'mailer'];
 
-  constructor(httpApp, mailer) {
+  constructor(httpApp, resourceManager, mailer) {
     super();
+    this.authKit = resourceManager.authKit;
+    this.resourceManager = resourceManager.resourceManager;
     this.mailer = mailer;
+
+    const authKit = {
+      authCore: this.authKit.get('authCore'),
+      sequelizeStore: this.authKit.get('sequelizeStore'),
+      authProviderManager: this.authKit.get('authProviderManager'),
+      koaHelper: this.authKit.get('koaHelper'),
+    };
 
     this.routers = [
       MainRouter,
@@ -33,6 +42,8 @@ export default class RouterManager extends ServiceBase {
       ModuleComplierRouter,
     ]
     .map(Router => new Router({
+      authKit,
+      resourceManager: this.resourceManager,
       mailer: this.mailer,
       zcfService: this.zcfService,
     }).setupRoutes(httpApp.appConfig));

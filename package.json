@@ -1,7 +1,7 @@
 {
-  "name": "az-react-material-dev",
+  "name": "az-fullstack-sequelize",
   "version": "1.0.0",
-  "description": "A react material ui seed project",
+  "description": "A fullstack sequelize seed project",
   "main": "dist/server/index.js",
   "repository": {
     "type": "git"
@@ -29,7 +29,9 @@
     "test:front-end": "eslint --ext .js ./test/front-end && cross-env NODE_ENV=test mocha --require ignore-styles --require ./test/babel-register.js './test/front-end/**/*.spec.js'",
     "test-watch:front-end": "eslint --ext .js ./test/front-end && cross-env NODE_ENV=test mocha --watch ./test --watch-extensions js,ts --require ignore-styles --require ./test/babel-register.js './test/front-end/**/*.spec.js'",
     "gmail-auth": "cross-env NODE_ENV=production node dist/server/scripts/gmailAuth.js",
-    "gmail-auth-dev": "cross-env NODE_ENV=development node dist/server/scripts/gmailAuth.js"
+    "gmail-auth-dev": "cross-env NODE_ENV=development node dist/server/scripts/gmailAuth.js",
+    "start-db": "docker-compose -f dev.yml up -d",
+    "stop-db": "docker-compose -f dev.yml down"
   },
   "license": "MIT",
   "engines": {
@@ -38,15 +40,17 @@
   "dependencies": {
     "@babel/plugin-transform-modules-amd": "^7.2.0",
     "@date-io/moment": "1.1.0",
-    "@material-ui/core": "4.3.2",
-    "@material-ui/icons": "4.2.1",
-    "@material-ui/lab": "4.0.0-alpha.23",
-    "@material-ui/pickers": "3.2.2",
-    "@material-ui/styles": "4.3.3",
+    "@material-ui/core": "4.7.1",
+    "@material-ui/icons": "4.5.1",
+    "@material-ui/lab": "4.0.0-alpha.34",
+    "@material-ui/pickers": "3.2.8",
+    "@material-ui/styles": "4.7.1",
     "app-root-path": "^1.0.0",
     "axios": "^0.19.0",
+    "az-authn-kit": "git+https://github.com/xtforgame/az-authn-kit.git#v0.1.2",
     "az-mail-kit": "git+https://github.com/xtforgame/az-mail-kit.git#v0.1.0",
     "az-restful-helpers": "git+https://github.com/xtforgame/az-restful-helpers.git#v0.1.0",
+    "az-sequelize-utils": "git+https://github.com/xtforgame/az-sequelize-utils.git#v0.1.0",
     "azldi": "git+https://github.com/xtforgame/azldi.git#v0.1.0",
     "classnames": "^2.2.5",
     "connected-react-router": "^6.5.2",
@@ -70,10 +74,11 @@
     "lodash": "^4.17.4",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
+    "pg": "7.4.0",
     "pngjs": "^3.3.3",
     "prop-types": "^15.6.0",
     "pure-epic": "git+https://github.com/xtforgame/pure-epic.git#v1.0.0",
-    "querchy": "git+https://github.com/xtforgame/querchy.git#v0.2.0",
+    "querchy": "git+https://github.com/xtforgame/querchy.git#v0.3.0",
     "react": "^16.8.2",
     "react-color": "^2.17.3",
     "react-dom": "^16.8.2",
@@ -86,7 +91,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-sticky": "^6.0.3",
-    "react-swipeable-views": "^0.13.0",
+    "react-swipeable-views": "^0.13.3",
     "react-swipeable-views-utils": "^0.13.3",
     "react-youtube": "^7.9.0",
     "recompose": "^0.26.0",
@@ -97,6 +102,7 @@
     "reselect": "^3.0.1",
     "rrw-module": "git+https://github.com/xtforgame/rrw-module.git#v1.0.0",
     "rxjs": "^6.5.2",
+    "sequelize": "4.37.5",
     "uuid": "^3.3.2",
     "validator": "^10.2.0"
   },

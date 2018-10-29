@@ -1,11 +1,31 @@
 version: '3'
 services:
+  pg-master:
+    image: postgres:9.6
+
+    container_name: afs-${CONTAINER_POSTFIX:-default}-postgresql-master
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: xxxx1234
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - "../pgdata:/var/lib/postgresql/data/pgdata"
+
   webserver:
-    image: seed-proj/webserver
+    image: seed-proj/afs
     build:
       context: .
 
-    container_name: webserver-${CONTAINER_POSTFIX:-default}
+    container_name: afs-${CONTAINER_POSTFIX:-default}
+    links:
+      - "pg-master:postgres"
+
+    depends_on:
+      - "pg-master"
 
     volumes:
       - ".:/usr/volumes/src/"
