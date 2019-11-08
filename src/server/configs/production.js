@@ -39,6 +39,13 @@ const postgresUser = 'rick';
 const postgresDbName = 'db_rick_data';
 const postgresPassword = 'xxxx1234';
 const postgresHost = 'postgres';
+const minioInfoConfig = {
+  endPoint: 'minio1',
+  port: 9000,
+  useSSL: false,
+  accessKey: 'minioxxxak',
+  secretKey: 'minioxxxsk',
+};
 
 export {
   credentialFiles,
@@ -56,4 +63,5 @@ export {
   postgresDbName,
   postgresPassword,
   postgresHost,
+  minioInfoConfig,
 };

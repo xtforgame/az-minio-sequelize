@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { readFile } from '~/utils/imageHelpers';
+import { promiseReduce } from 'common/utils';
 
 const styles = theme => ({
   input: {
@@ -20,6 +21,7 @@ const FormFileInput = (props) => {
     children,
     inputProps,
     labelProps,
+    readFileOption = {},
   } = props;
   return (
     <React.Fragment>
@@ -31,12 +33,11 @@ const FormFileInput = (props) => {
         type="file"
         onChange={(e) => {
           onChange(e);
-          if (e.target.files[0]) {
-            readFile(e.target.files[0])
-            .then((imgInfo) => {
-              onLoadEnd(imgInfo);
-            });
-          }
+          const files = Array.from(e.target.files);
+          promiseReduce(files, (_, file) => readFile(file, readFileOption)
+          .then((imgInfo) => {
+            onLoadEnd(imgInfo);
+          }));
         }}
       />
       <label

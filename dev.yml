@@ -10,3 +10,19 @@ services:
     ports:
       - "5432:5432"
 
+  minio1:
+    image: minio/minio:RELEASE.2019-04-09T01-22-30Z
+
+    container_name: minio1
+
+    volumes:
+      - ./minio_data:/data
+
+    ports:
+      - "9001:9000"
+
+    environment:
+      MINIO_ACCESS_KEY: minioxxxak
+      MINIO_SECRET_KEY: minioxxxsk
+
+    command: server /data

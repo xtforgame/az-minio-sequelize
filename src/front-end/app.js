@@ -23,6 +23,7 @@ import {
   sessionVerified,
 } from '~/containers/App/actions';
 import { i18nextInited, appLocaleMap } from './i18next';
+import 'react-image-lightbox/style.css';
 import './main.css';
 
 // Create a history of your choosing (we're using a browser history in this case)
