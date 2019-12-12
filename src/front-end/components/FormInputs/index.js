@@ -20,6 +20,8 @@ import FormDatePicker from './FormDateTimePicker/FormDatePicker';
 import FormTimePicker from './FormDateTimePicker/FormTimePicker';
 import FormDateTimePicker from './FormDateTimePicker/FormDateTimePicker';
 
+import FormImagesInput from './FormImagesInput';
+
 import NumberFormatInput from './NumberFormatInput';
 import ListInput from './ListInput';
 import InternalLink from './InternalLink';
@@ -47,6 +49,8 @@ export {
   FormDatePicker,
   FormTimePicker,
   FormDateTimePicker,
+
+  FormImagesInput,
 
   NumberFormatInput,
   InternalLink,

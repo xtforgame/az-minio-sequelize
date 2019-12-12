@@ -1,6 +1,6 @@
-# AzFullstackSequelizeDev
+# AzSequelizeMinIO
 
-A fullstack sequelize seed project
+A fullstack sequelize seed project with MinIO
 
 Run `npm install`
 

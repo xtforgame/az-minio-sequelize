@@ -12,6 +12,7 @@ import ResourceManager from '~/services/resource-manager';
 import CreateTestData from '~/services/create-test-data';
 import RouterManager from '~/services/router-manager';
 import Mailer from '~/services/mailer';
+import MinioApi from '~/services/minio';
 
 class Server {
   ioc : any;
@@ -25,6 +26,7 @@ class Server {
       CreateTestData,
       RouterManager,
       Mailer,
+      MinioApi,
     ]);
 
     this.ioc.digest();
